@@ -7,6 +7,7 @@ import {
   DatePickerAndroid,
   Button,
 } from 'react-native';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 export default class CreateEventScreen extends React.Component {
   static navigationOptions = {
@@ -16,11 +17,17 @@ export default class CreateEventScreen extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      eventName: '',
-      date: '',
+      eventNameInput: '',
+      eventDateTimeInput:'',
+      eventLocationInput:'',
+      eventDescriptionInput:'',
+      eventTagInput:'',
+      date: 'Date and Time',
+      isDateTimePickerVisible: false,
     };
   };
 
+/*
   _showDatePicker = async () => {
     try {
       const { action, year, month, day } = await DatePickerAndroid.open({
@@ -34,47 +41,58 @@ export default class CreateEventScreen extends React.Component {
     } catch ({ code, message }) {
       console.warn('Cannot open date picker', message);
     }
-  };
+  }; 
+  */
+
+  _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+
+  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+  _handleDateTimePicked = (date) => {
+    this.setState({date: date});
+    this.setState({eventDateTimeInput: date})
+    this._hideDateTimePicker()
+  }
 
   render() {
     return (
       <View style={styles.container}>
 
         <View style={styles.flowRight}>
-            <TextInput
-              style={styles.eventInput}
-              value={this.state.eventNameInput}
-              placeholder='Name'/>
-        </View>
-        <View style={styles.flowRight}>
-            <TextInput
-              style={styles.eventInput}
-              value={this.state.date.toLocaleString()}
-              placeholder='Date'
-              onPress={this._showDatePicker}/>
+          <TextInput
+            style={styles.eventInput}
+            onChangeText={(text) => this.setState({eventNameInput: text})}
+            placeholder='Name'/>
         </View>
         <View style={styles.flowRight}>
           <Button
-          onPress={this._showDatePicker}
-          title="Date"/>
+            onPress={this._showDateTimePicker}
+            title={this.state.date.toLocaleString()}/>
+          <DateTimePicker
+            isVisible={this.state.isDateTimePickerVisible}
+            onConfirm={this._handleDateTimePicked}
+            onCancel={this._hideDateTimePicker}
+            mode='datetime'
+          />
         </View>
         <View style={styles.flowRight}>
-            <TextInput
-              style={styles.eventInput}
-              value={this.state.eventNameInput}
-              placeholder='Location'/>
+          <TextInput
+            style={styles.eventInput}
+            onChangeText={(text) => this.setState({eventLocationInput: text})}
+            placeholder='Location'/>
         </View>
         <View style={styles.flowRight}>
-            <TextInput
-              style={styles.eventInput}
-              value={this.state.eventNameInput}
-              placeholder='Description'/>
+          <TextInput
+            style={styles.eventInput}
+            onChangeText={(text) => this.setState({eventDescriptionInput: text})}
+            placeholder='Description'
+            multiline= {true}/>
         </View>
         <View style={styles.flowRight}>
-            <TextInput
-              style={styles.eventInput}
-              value={this.state.eventNameInput}
-              placeholder='Tags'/>
+          <TextInput
+            style={styles.eventInput}
+            onChangeText={(text) => this.setState({eventTagInput: text})}
+            placeholder='Tags'/>
         </View>
         
       </View>
@@ -97,7 +115,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   eventInput: {
-    height: 36,
+    minHeight: 36,
     padding: 4,
     marginBottom: 5,
     flexGrow: 1,
