@@ -27,23 +27,6 @@ export default class CreateEventScreen extends React.Component {
     };
   };
 
-/*
-  _showDatePicker = async () => {
-    try {
-      const { action, year, month, day } = await DatePickerAndroid.open({
-        // Use `new Date()` for current date.
-        // May 25 2020. Month 0 is January.
-        date: new Date(),
-      });
-      if (action !== DatePickerAndroid.dismissedAction) {
-        this.setState({date: new Date(year, month, day)})
-      }
-    } catch ({ code, message }) {
-      console.warn('Cannot open date picker', message);
-    }
-  }; 
-  */
-
   _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });

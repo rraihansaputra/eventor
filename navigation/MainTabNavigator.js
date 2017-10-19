@@ -75,6 +75,6 @@ export default TabNavigator(
     tabBarPosition: 'bottom',
     animationEnabled: true,
     swipeEnabled: false,
-    initialRouteName: 'CreateEvent',
+    initialRouteName: 'Home',
   }
 );
