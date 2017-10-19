@@ -38,18 +38,28 @@ export default TabNavigator(
         switch (routeName) {
           case 'Home':
             iconName = Platform.OS === 'ios'
-              ? `ios-information-circle${focused ? '' : '-outline'}`
-              : 'md-information-circle';
+              ? `ios-home${focused ? '' : '-outline'}`
+              : 'md-home';
             break;
           case 'Calendar':
             iconName = Platform.OS === 'ios'
-              ? `ios-link${focused ? '' : '-outline'}`
-              : 'md-link';
+              ? `ios-calendar${focused ? '' : '-outline'}`
+              : 'md-calendar';
             break;
           case 'Chat':
             iconName = Platform.OS === 'ios'
-              ? `ios-options${focused ? '' : '-outline'}`
-              : 'md-options';
+              ? `ios-chatbubbles${focused ? '' : '-outline'}`
+              : 'md-chatbubbles';
+          case 'HostCalendar':
+            iconName = Platform.OS === 'ios'
+              ? `ios-calendar${focused ? '' : '-outline'}`
+              : 'md-calendar';
+            break;
+          case 'CreateEvent':
+            iconName = Platform.OS === 'ios'
+              ? `ios-contract${focused ? '' : '-outline'}`
+              : 'md-contract';
+            break;
         }
         return (
           <Ionicons
@@ -65,6 +75,6 @@ export default TabNavigator(
     tabBarPosition: 'bottom',
     animationEnabled: true,
     swipeEnabled: false,
-    initialRouteName: 'Home',
+    initialRouteName: 'CreateEvent',
   }
 );
