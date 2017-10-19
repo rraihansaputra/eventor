@@ -6,23 +6,28 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import Colors from '../constants/Colors';
 
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+
+import HostCalendarScreen from '../screens/HostCalendarScreen';
+import ChatScreen from '../screens/ChatScreen';
 import CalendarScreen from '../screens/CalendarScreen';
+import CreateEventScreen from '../screens/CreateEventScreen'
 
 export default TabNavigator(
-  {
+	{
+		HostCalendar: {
+		  screen: HostCalendarScreen,
+		},
+		CreateEvent: {
+		screen: CreateEventScreen,
+		},
     Home: {
       screen: HomeScreen,
     },
-    Links: {
-      screen: LinksScreen,
-    },
-    Settings: {
-      screen: SettingsScreen,
-    },
     Calendar: {
       screen: CalendarScreen,
+    },
+    Chat: {
+      screen: ChatScreen,
     },
   },
   {
@@ -36,12 +41,12 @@ export default TabNavigator(
               ? `ios-information-circle${focused ? '' : '-outline'}`
               : 'md-information-circle';
             break;
-          case 'Links':
+          case 'Calendar':
             iconName = Platform.OS === 'ios'
               ? `ios-link${focused ? '' : '-outline'}`
               : 'md-link';
             break;
-          case 'Settings':
+          case 'Chat':
             iconName = Platform.OS === 'ios'
               ? `ios-options${focused ? '' : '-outline'}`
               : 'md-options';
@@ -60,6 +65,6 @@ export default TabNavigator(
     tabBarPosition: 'bottom',
     animationEnabled: true,
     swipeEnabled: false,
-    initialRouteName: 'Settings',
+    initialRouteName: 'Home',
   }
 );

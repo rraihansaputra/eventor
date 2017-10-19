@@ -2,9 +2,9 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 
-export default class CalendarScreen extends React.Component {
+export default class HostCalendarScreen extends React.Component {
   static navigationOptions = {
-    title: 'Calendar',
+    title: 'Host Calendar',
   };
 
   render() {
@@ -13,6 +13,7 @@ export default class CalendarScreen extends React.Component {
         {/* Go ahead and delete ExpoLinksView and replace it with your
            * content, we just wanted to provide you with some helpful links */}
         <ExpoLinksView />
+					<Text>This is the HostCalendarScreen</Text>
       </ScrollView>
     );
   }
