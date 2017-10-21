@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, Text, View, } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 import Store from '../stores/eventmaster';
 import { observer } from 'mobx-react/native';
+import User from '../stores/user'
 
 @observer
 export default class HostCalendarScreen extends React.Component {
@@ -13,7 +14,7 @@ export default class HostCalendarScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        {Store.events.slice().map((event) => (
+        {Store.createdEvents(User.id).map((event) => (
                   <View style={styles.eventViewList}>
                     <Text> {event.key} </Text>
                     <Text> {event.name} </Text>

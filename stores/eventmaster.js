@@ -16,7 +16,15 @@ class Store {
 	}
 
 	@computed get openEvents() {
-		return this.events.filter(event => event.created.by);
+		return this.events.filter(event => event.created_by);
+	}
+
+	@observable createdEvents(userId) {
+		return this.events.filter(event => event.created_by == userId);
+	}
+
+	@observable unseenEvents(eventsSeen) {
+		return this.events.filter(event => !eventsSeen.includes(event.key));
 	}
 
 }

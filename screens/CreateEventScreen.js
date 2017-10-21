@@ -13,6 +13,7 @@ import { observer } from 'mobx-react/native';
 import { action, computed, observable } from 'mobx';
 import Event from '../stores/event'
 import Store from '../stores/eventmaster'
+import User from '../stores/user'
 
 @observer
 export default class CreateEventScreen extends React.Component {
@@ -51,20 +52,14 @@ export default class CreateEventScreen extends React.Component {
   };
 
   _saveFormData = () => {
-    this.justCreatedEvent = new Event(
-      this.state.eventNameInput,
-      this.state.eventHostNameInput,
-      this.state.eventDateTimeInput,
-      this.state.eventLocationInput,
-      this.state.eventDescriptionInput,
-      this.state.eventTagInput,
-      );
+    console.log(User.idString);
     Store.addEvent(
       this.state.eventNameInput,
       this.state.eventHostNameInput,
       this.state.eventDateTimeInput,
       this.state.eventLocationInput,
       this.state.eventDescriptionInput,
+      User.idString,
       this.state.eventTagInput,
       );
     this._resetForm();
@@ -93,7 +88,6 @@ export default class CreateEventScreen extends React.Component {
   };
 
   _clearText = (fieldName) => {
-    console.log(fieldName);
     this.refs[fieldName].setNativeProps({text: ''});
   };
 
@@ -153,6 +147,7 @@ export default class CreateEventScreen extends React.Component {
             onPress={this._saveFormData}
             title={'Add Event'}/>
         </View>
+        <Text> {User.id}</Text>
         <ScrollView>
 
         {Store.events.slice().map((event) => (
