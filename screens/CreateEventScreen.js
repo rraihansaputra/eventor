@@ -35,7 +35,7 @@ export default class CreateEventScreen extends React.Component {
     this.setState({date: date});
     this.setState({eventDateTimeInput: date})
     this._hideDateTimePicker()
-  }
+  };
 
   render() {
     return (
@@ -50,7 +50,7 @@ export default class CreateEventScreen extends React.Component {
         <View style={styles.flowRight}>
           <Button
             onPress={this._showDateTimePicker}
-            title={this.state.date.toLocaleString()}/>
+            title={this.state.date.toString()}/>
           <DateTimePicker
             isVisible={this.state.isDateTimePickerVisible}
             onConfirm={this._handleDateTimePicked}
