@@ -51,4 +51,5 @@ export default class RootNavigator extends React.Component {
       `Push notification ${origin} with data: ${JSON.stringify(data)}`
     );
   };
+
 }
