@@ -10,9 +10,9 @@ export default class Event {
   @observable description = '';
   @observable tags = [];
   @observable created_at = undefined;
-  @observable created_by = 0;
+  @observable created_by = 1;
 
-  constructor(name, hostName, dateTime, location, description, tags) {
+  constructor(name, hostName, dateTime, location, description, tags='') {
     this.key = Date.now();
     this.name = name;
     this.hostName = hostName;
@@ -21,7 +21,7 @@ export default class Event {
     this.description = description;
     this.tags = tags.split(" ");
     this.created_at = Date.now();
-    this.created_by = 0;
+    this.created_by = 1;
   }
 
 }

@@ -1,7 +1,10 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
+import Store from '../stores/eventmaster';
+import { observer } from 'mobx-react/native';
 
+@observer
 export default class HostCalendarScreen extends React.Component {
   static navigationOptions = {
     title: 'Host Calendar',
@@ -10,10 +13,17 @@ export default class HostCalendarScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
-					<Text>This is the HostCalendarScreen</Text>
+        {Store.events.slice().map((event) => (
+                  <View style={styles.eventViewList}>
+                    <Text> {event.key} </Text>
+                    <Text> {event.name} </Text>
+                    <Text> {event.hostName} </Text>
+                    <Text> {event.dateTime.toString()} </Text>
+                    <Text> {event.location} </Text>
+                    <Text> {event.description} </Text>
+                    <Text> {event.tags} </Text>
+                  </View>
+                ))}
       </ScrollView>
     );
   }
@@ -24,5 +34,10 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 15,
     backgroundColor: '#fff',
+  },
+    eventViewList: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    alignSelf: 'stretch',
   },
 });

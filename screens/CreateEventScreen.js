@@ -6,18 +6,23 @@ import {
   TextInput,
   DatePickerAndroid,
   Button,
+  ScrollView,
 } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react/native';
 import { action, computed, observable } from 'mobx';
 import Event from '../stores/event'
-import { store } from '../stores/eventlist'
+import Store from '../stores/eventmaster'
 
 @observer
 export default class CreateEventScreen extends React.Component {
   static navigationOptions = {
     title: 'Create Event',
   };
+
+  async componentWillMount() {
+    Store.loaded=true;
+  }
 
   constructor(props){
     super(props);
@@ -34,7 +39,6 @@ export default class CreateEventScreen extends React.Component {
     this.justCreatedEvent = null;
   };
 
-  eventList = [];
 
   _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
@@ -54,10 +58,16 @@ export default class CreateEventScreen extends React.Component {
       this.state.eventLocationInput,
       this.state.eventDescriptionInput,
       this.state.eventTagInput,
-      )
-    this.eventList.push(this.justCreatedEvent);
+      );
+    Store.addEvent(
+      this.state.eventNameInput,
+      this.state.eventHostNameInput,
+      this.state.eventDateTimeInput,
+      this.state.eventLocationInput,
+      this.state.eventDescriptionInput,
+      this.state.eventTagInput,
+      );
     this._resetForm();
-    this.setState({Eventstatus: this.eventList.length.toString() });
   };
 
   _resetForm = () => {
@@ -143,19 +153,21 @@ export default class CreateEventScreen extends React.Component {
             onPress={this._saveFormData}
             title={'Add Event'}/>
         </View>
-        { this.eventList.length > 0 &&
-            <View style={styles.eventViewList}>
-              <Text> {this.justCreatedEvent.key} </Text>
-              <Text> {this.justCreatedEvent.name} </Text>
-              <Text> {this.justCreatedEvent.hostName} </Text>
-              <Text> {this.justCreatedEvent.dateTime.toString()} </Text>
-              <Text> {this.justCreatedEvent.location} </Text>
-              <Text> {this.justCreatedEvent.description} </Text>
-              <Text> {this.justCreatedEvent.tags} </Text>
-            </View>
-        }
+        <ScrollView>
 
-        
+        {Store.events.slice().map((event) => (
+                  <View style={styles.eventViewList}>
+                    <Text> {event.key} </Text>
+                    <Text> {event.name} </Text>
+                    <Text> {event.hostName} </Text>
+                    <Text> {event.dateTime.toString()} </Text>
+                    <Text> {event.location} </Text>
+                    <Text> {event.description} </Text>
+                    <Text> {event.tags} </Text>
+                  </View>
+                ))}
+        </ScrollView>
+
       </View>
     );
   }
