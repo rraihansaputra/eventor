@@ -5,6 +5,7 @@ class User {
 	@observable id = 'admin';
 	@observable eventsSeen = [];
 	@observable eventsInterested = [];
+	@observable tags = ["books", "cars", "knitting"];
 	@observable loaded = false;
 
 	@action addEventSeen(eventKey) {

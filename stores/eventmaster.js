@@ -33,8 +33,11 @@ class Store {
 		return this.events.filter(event => event.created_by == userId);
 	}
 
-	@observable unseenEvents(eventsSeen) {
-		return this.events.filter(event => !eventsSeen.includes(event.key));
+	@observable unseenEvents(user) {
+		return this.events.filter(event => 
+			!user.eventsSeen.includes(event.key) && 
+			event.created_by != user.id && 
+			event.tags.some(r=> user.tags.indexOf(r) >= 0));
 	}
 
 }

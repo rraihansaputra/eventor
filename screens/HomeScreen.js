@@ -42,7 +42,7 @@ export default class HomeScreen extends React.Component {
           <Text style={styles.getStartedText}>
             FUCK
           </Text>
-          {Store.openEvents.map((event) => (
+          {Store.unseenEvents(User).map((event) => (
                   <View style={styles.eventViewList}>
                     <Text> {event.key} </Text>
                     <Text> {event.name} </Text>
@@ -50,7 +50,7 @@ export default class HomeScreen extends React.Component {
                     <Text> {event.dateTime.toString()} </Text>
                     <Text> {event.location} </Text>
                     <Text> {event.description} </Text>
-                    <Text> {event.tags} </Text>
+                    <Text> {event.tags.join()} </Text>
                   </View>
                 ))}
         </ScrollView>
