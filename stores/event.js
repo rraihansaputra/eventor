@@ -13,8 +13,6 @@ export default class Event {
   @observable created_by = '';
 
   constructor(name, hostName, dateTime, location, description, created_by, tags='') {
-    console.log(created_by);
-    console.log(created_by == 'admin');
     this.key = Date.now();
     this.name = name;
     this.hostName = hostName;

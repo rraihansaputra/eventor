@@ -9,9 +9,13 @@ import {
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
+import { observer } from 'mobx-react/native'
+import User from '../stores/user'
+import Store from '../stores/eventmaster'
 
 import { MonoText } from '../components/StyledText';
 
+@observer
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
@@ -38,66 +42,17 @@ export default class HomeScreen extends React.Component {
           <Text style={styles.getStartedText}>
             FUCK
           </Text>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
+          {Store.openEvents.map((event) => (
+                  <View style={styles.eventViewList}>
+                    <Text> {event.key} </Text>
+                    <Text> {event.name} </Text>
+                    <Text> {event.hostName} </Text>
+                    <Text> {event.dateTime.toString()} </Text>
+                    <Text> {event.location} </Text>
+                    <Text> {event.description} </Text>
+                    <Text> {event.tags} </Text>
+                  </View>
+                ))}
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
