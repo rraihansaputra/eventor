@@ -14,6 +14,7 @@ class Store {
 		this.addEvent("Knitting Tutorials 101", "Knitting Community", new Date(2017, 10, 1, 13), "Southbank", "Learn to knit with instagram extraordinaire, Me!","knit", "knitting tutorial beginners");
 		this.addEvent("Cars and Coffee", "RealGarage", new Date(2017, 11, 9, 7), "Toowong", "No frills, just Cars and Coffee on a Sunday morning", "cars", "cars meetup coffee sunday");
 		this.addEvent("Book Fair 2018", "Library", new Date(), "CBD", "Biggest book fair in Brisbane is coming!", "book", "book fair discount literature books");
+		this.addEvent("Pick-up basketball", "Ryan", new Date(2017, 9, 30), "Toowong Basketball Court", "Looking for pickup games this weekend. Come! open to all players!", "Ryan", "basketball pickup sport weekend");
 	}
 
 	@action addEvent(name, hostName, dateTime, location, description, created_by, tags) {
@@ -44,6 +45,10 @@ class Store {
 	@observable interestedEvents(user) {
 		return _.sortBy(this.events.filter(event =>
 			user.eventsInterested.includes(event.key)), 'dateTime');
+	}
+
+	@computed get allTags () { //TODO
+
 	}
 
 }
