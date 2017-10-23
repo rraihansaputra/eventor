@@ -9,17 +9,27 @@ class User {
 	@observable loaded = false;
 
 	@action addEventSeen(eventKey) {
-		this.eventsSeen.push(eventKey)
+		this.eventsSeen.push(eventKey);
 	}
 
 	@action addEventInterested(eventKey) {
-		this.eventsSeen.push(eventKey)
-		this.eventsInterested.push(eventKey)
+		this.eventsSeen.push(eventKey);
+		this.eventsInterested.push(eventKey);
+	}
+
+	@action resetEventsSeen() {
+		this.eventsSeen.clear();
+		this.eventsInterested.clear();
 	}
 
 	@computed get idString() {
 		return this.id.toString();
 	}
+
+	@computed get eventsSeenList() {
+		return this.eventsSeen;
+	}
+
 
 }
 

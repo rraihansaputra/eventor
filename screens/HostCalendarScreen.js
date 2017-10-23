@@ -14,8 +14,8 @@ export default class HostCalendarScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        {Store.createdEvents(User.id).map((event) => (
-                  <View style={styles.eventViewList}>
+        {Store.createdEvents(User).map((event) => (
+                  <View key={event.key} style={styles.eventViewList}>
                     <Text> {event.key} </Text>
                     <Text> {event.name} </Text>
                     <Text> {event.hostName} </Text>

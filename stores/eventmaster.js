@@ -29,15 +29,20 @@ class Store {
 		return this.events.filter(event => event.created_by);
 	}
 
-	@observable createdEvents(userId) {
-		return this.events.filter(event => event.created_by == userId);
+	@observable createdEvents(user) {
+		return this.events.filter(event => event.created_by == user.id);
 	}
 
 	@observable unseenEvents(user) {
 		return this.events.filter(event => 
-			!user.eventsSeen.includes(event.key) && 
-			event.created_by != user.id && 
+			!user.eventsSeen.includes(event.key) &&
+			event.created_by != user.id &&
 			event.tags.some(r=> user.tags.indexOf(r) >= 0));
+	}
+
+	@observable interestedEvents(user) {
+		return this.events.filter(event => 
+			user.eventsInterested.includes(event.key));
 	}
 
 }

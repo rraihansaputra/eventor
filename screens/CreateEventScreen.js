@@ -151,7 +151,7 @@ export default class CreateEventScreen extends React.Component {
         <ScrollView>
 
         {Store.events.slice().map((event) => (
-                  <View style={styles.eventViewList}>
+                  <View key={event.key} style={styles.eventViewList}>
                     <Text> {event.key} </Text>
                     <Text> {event.name} </Text>
                     <Text> {event.hostName} </Text>

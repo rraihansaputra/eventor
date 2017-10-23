@@ -7,19 +7,37 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button,
 } from 'react-native';
 import { WebBrowser } from 'expo';
-import { observer } from 'mobx-react/native'
-import User from '../stores/user'
-import Store from '../stores/eventmaster'
+import { observable } from 'mobx';
+import { observer } from 'mobx-react/native';
+import User from '../stores/user';
+import Store from '../stores/eventmaster';
+
+import SwipeCards from 'react-native-swipe-cards';
 
 import { MonoText } from '../components/StyledText';
 
 @observer
 export default class HomeScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   static navigationOptions = {
     header: null,
   };
+
+  handleYup (card) {
+    User.addEventInterested(card.key);
+  }
+  handleNope (card) {
+    User.addEventSeen(card.key);
+  }
+
+  @observable unseenEvents = Store.unseenEvents(User)
 
   render() {
     return (
@@ -29,30 +47,13 @@ export default class HomeScreen extends React.Component {
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
-          <Text style={styles.getStartedText}>
-            FUCK
-          </Text>
-          {Store.unseenEvents(User).map((event) => (
-                  <View style={styles.eventViewList}>
-                    <Text> {event.key} </Text>
-                    <Text> {event.name} </Text>
-                    <Text> {event.hostName} </Text>
-                    <Text> {event.dateTime.toString()} </Text>
-                    <Text> {event.location} </Text>
-                    <Text> {event.description} </Text>
-                    <Text> {event.tags.join()} </Text>
-                  </View>
-                ))}
+          <SwipeCards
+            cards={Store.unseenEvents(User)}
+            renderCard={(cardData) => <Card {...cardData} />}
+            renderNoMoreCards={() => <NoMoreCards />}
+            handleYup={this.handleYup}
+            handleNope={this.handleNope}
+          />
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
@@ -101,6 +102,44 @@ export default class HomeScreen extends React.Component {
       'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
     );
   };
+}
+
+class Card extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <View style={styles.card}>
+        <Text>{this.props.name}</Text>
+        <Text> {this.props.hostName} </Text>
+        <Text> {this.props.dateTime.toString()} </Text>
+        <Text> {this.props.location} </Text>
+        <Text> {this.props.description} </Text>
+        <Text> {this.props.tags.join(" ")} </Text>
+      </View>
+    )
+  }
+}
+
+@observer
+class NoMoreCards extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <View>
+        <View>
+          <Button
+              onPress={() => User.resetEventsSeen()}
+              title={"Reset Cards"}/>
+        </View>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -193,5 +232,15 @@ const styles = StyleSheet.create({
   eventor: {
     padding: 20,
     fontSize: 30,
+  },
+  card: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 400,
+    height: 400,
+    backgroundColor: 'pink',
+  },
+  noMoreCardsText: {
+    fontSize: 22,
   },
 });
