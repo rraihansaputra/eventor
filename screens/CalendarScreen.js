@@ -3,7 +3,8 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 import Store from '../stores/eventmaster';
 import { observer } from 'mobx-react/native';
-import User from '../stores/user'
+import User from '../stores/user';
+import EventRowView from '../components/EventRowView';
 
 @observer
 export default class CalendarScreen extends React.Component {
@@ -15,15 +16,7 @@ export default class CalendarScreen extends React.Component {
     return (
       <ScrollView style={styles.container}>
         {Store.interestedEvents(User).map((event) => (
-                  <View key={event.key} style={styles.eventViewList}>
-                    <Text> {event.key} </Text>
-                    <Text> {event.name} </Text>
-                    <Text> {event.hostName} </Text>
-                    <Text> {event.dateTime.toString()} </Text>
-                    <Text> {event.location} </Text>
-                    <Text> {event.description} </Text>
-                    <Text> {event.tags.join()} </Text>
-                  </View>
+                  <EventRowView key={event.key} event={event}/>
                 ))}
       </ScrollView>
     );
@@ -35,10 +28,5 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 15,
     backgroundColor: '#fff',
-  },
-  eventViewList: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    alignSelf: 'stretch',
   },
 });
