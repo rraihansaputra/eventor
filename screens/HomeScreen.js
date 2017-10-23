@@ -37,6 +37,14 @@ export default class HomeScreen extends React.Component {
     User.addEventSeen(card.key);
   }
 
+  _renderYup = () => {
+    this.refs.swipeCardDisplay._forceRightSwipe();
+  }
+
+  _renderNope = () => {
+    this.refs.swipeCardDisplay._forceLeftSwipe();
+  }
+
   @observable unseenEvents = Store.unseenEvents(User)
 
   render() {
@@ -44,18 +52,32 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
       <Text style={styles.eventor}
           >EVENTOR</Text>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
+        <View
+          style={styles.container, {height:500}}>
           <SwipeCards
+            ref={'swipeCardDisplay'}
             cards={Store.unseenEvents(User)}
             renderCard={(cardData) => <Card {...cardData} />}
             renderNoMoreCards={() => <NoMoreCards />}
             handleYup={this.handleYup}
             handleNope={this.handleNope}
           />
-        </ScrollView>
-
+        </View>
+        <View style={styles.container, {paddingTop: 10, flexDirection:'row', justifyContent:'center'}}>
+            <View style={{marginHorizontal:20,}}>
+              <Button
+                onPress={this._renderNope}
+                color='red'
+                title={"Nah"}/>
+            </View>
+            <View style={{marginHorizontal:20,}}>
+              <Button
+                onPress={this._renderYup}
+                color='green'
+                title={"Interested"}/>
+            </View>
+          </View>
+        {/*
         <View style={styles.tabBarInfoContainer}>
           <View
             style={[styles.codeHighlightContainer, styles.navigationFilename]}>
@@ -64,6 +86,7 @@ export default class HomeScreen extends React.Component {
             </MonoText>
           </View>
         </View>
+      */}
       </View>
     );
   }
@@ -232,13 +255,19 @@ const styles = StyleSheet.create({
   eventor: {
     padding: 20,
     fontSize: 30,
+    alignContent:'center',
   },
   card: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 400,
-    height: 400,
-    backgroundColor: 'pink',
+    width: 360,
+    height: 380,
+    borderRadius: 5,
+    overflow: 'hidden',
+    borderColor: 'grey',
+    backgroundColor: 'white',
+    borderWidth: 1,
+    elevation: 1,
   },
   noMoreCardsText: {
     fontSize: 22,

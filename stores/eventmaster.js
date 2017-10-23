@@ -41,7 +41,7 @@ class Store {
 	}
 
 	@observable interestedEvents(user) {
-		return this.events.filter(event => 
+		return this.events.filter(event =>
 			user.eventsInterested.includes(event.key));
 	}
 
