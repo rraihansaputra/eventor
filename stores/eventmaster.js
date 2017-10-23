@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { action, computed, observable } from 'mobx';
 import Event from './event'
 
@@ -41,8 +42,8 @@ class Store {
 	}
 
 	@observable interestedEvents(user) {
-		return this.events.filter(event =>
-			user.eventsInterested.includes(event.key));
+		return _.sortBy(this.events.filter(event =>
+			user.eventsInterested.includes(event.key)), 'dateTime');
 	}
 
 }

@@ -9,10 +9,10 @@ export default class EventRowView extends React.Component {
   render () {
     const {event} = this.props;
     return (
-      <View key={event.key} style={styles.eventViewList}>
+      <View key={event.key} style={styles.container}>
         <View>
           <Text style={{fontSize:20}}> {event.name} </Text>
-          <Text> by {event.hostName} </Text> 
+          <Text> hosted by {event.hostName} </Text>
         </View>
         <View>
           <Text> {event.dateTime.toDateString()}, {event.dateTime.toTimeString()} </Text>
@@ -28,7 +28,8 @@ export default class EventRowView extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
+    paddingLeft: 5,
     backgroundColor: '#fff',
+    marginBottom: 10,
   },
 });

@@ -14,6 +14,7 @@ import { action, computed, observable } from 'mobx';
 import Event from '../stores/event'
 import Store from '../stores/eventmaster'
 import User from '../stores/user'
+import EventRowView from '../components/EventRowView'
 
 @observer
 export default class CreateEventScreen extends React.Component {
@@ -30,14 +31,14 @@ export default class CreateEventScreen extends React.Component {
     this.state = {
       eventNameInput: '',
       eventHostNameInput: '',
-      eventDateTimeInput:'',
+      eventDateTimeInput:new Date(0),
       eventLocationInput:'',
       eventDescriptionInput:'',
       eventTagInput:'',
       date: 'Date and Time',
       isDateTimePickerVisible: false,
+      eventCreated: '',
     };
-    this.justCreatedEvent = null;
   };
 
 
@@ -52,7 +53,6 @@ export default class CreateEventScreen extends React.Component {
   };
 
   _saveFormData = () => {
-    console.log(User.idString);
     Store.addEvent(
       this.state.eventNameInput,
       this.state.eventHostNameInput,
@@ -62,6 +62,7 @@ export default class CreateEventScreen extends React.Component {
       User.idString,
       this.state.eventTagInput,
       );
+    this.state.eventCreated = 'Event Created!';
     this._resetForm();
   };
 
@@ -69,7 +70,7 @@ export default class CreateEventScreen extends React.Component {
     this.state = {
       eventNameInput: '',
       eventHostNameInput: '',
-      eventDateTimeInput:'',
+      eventDateTimeInput:new Date(0),
       eventLocationInput:'',
       eventDescriptionInput:'',
       eventTagInput:'',
@@ -93,6 +94,7 @@ export default class CreateEventScreen extends React.Component {
 
   render() {
     return (
+      <ScrollView>
       <View style={styles.container}>
 
         <View style={styles.flowRight}>
@@ -147,23 +149,9 @@ export default class CreateEventScreen extends React.Component {
             onPress={this._saveFormData}
             title={'Add Event'}/>
         </View>
-        <Text> {User.id}</Text>
-        <ScrollView>
-
-        {Store.events.slice().map((event) => (
-                  <View key={event.key} style={styles.eventViewList}>
-                    <Text> {event.key} </Text>
-                    <Text> {event.name} </Text>
-                    <Text> {event.hostName} </Text>
-                    <Text> {event.dateTime.toString()} </Text>
-                    <Text> {event.location} </Text>
-                    <Text> {event.description} </Text>
-                    <Text> {event.tags} </Text>
-                  </View>
-                ))}
-        </ScrollView>
-
+        <Text> { this.state.eventCreated } </Text>
       </View>
+      </ScrollView>
     );
   }
 }
@@ -189,9 +177,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     fontSize: 18,
   },
-  eventViewList: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    alignSelf: 'stretch',
+  eventRowContainer: {
+    paddingTop: 15,
+    backgroundColor: '#fff',
   },
 });
