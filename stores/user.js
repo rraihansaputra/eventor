@@ -24,12 +24,10 @@ class User {
 
 	@action addTag(tag) {
 		this.tagSet.add(tag);
-		console.log(this.tagSet)
 	}
 
 	@action removeTag(tag) {
 		this.tagSet.delete(tag);
-		console.log(this.tagSet)
 	}
 
 	@computed get idString() {
@@ -41,8 +39,6 @@ class User {
 	}
 
 	@computed get tags() {
-		console.log('getting tags..')
-		console.log([...this.tagSet])
 		return [...this.tagSet]
 	}
 

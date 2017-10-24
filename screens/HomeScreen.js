@@ -48,7 +48,7 @@ export default class HomeScreen extends React.Component {
     catch(e){}
   }
 
-  @observable unseenEvents = Store.unseenEvents(User)
+  @observable unseenEvents = Store.unseenEvents(User);
 
   render() {
     return (

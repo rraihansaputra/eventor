@@ -46,13 +46,17 @@ class Fml extends React.Component {
   }
 
   _handlePress = () => {
-    User.addTag(this.props.tag);
-    this.setState({userTag: true})
-    this.render();
+		if (!this.state.userTag) {
+	    User.addTag(this.props.tag);
+	    this.setState({userTag: true});
+	    this.render(); }
+		else {
+	    User.removeTag(this.props.tag);
+	    this.setState({userTag: false});
+	    this.render(); }
   }
 
   render () {
-    console.log('render')
     return (
       <Button
         key = {this.props.tag}

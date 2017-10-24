@@ -11,10 +11,10 @@ import {
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { observer } from 'mobx-react/native';
 import { action, computed, observable } from 'mobx';
-import Event from '../stores/event'
-import Store from '../stores/eventmaster'
-import User from '../stores/user'
-import EventRowView from '../components/EventRowView'
+import Event from '../stores/event';
+import Store from '../stores/eventmaster';
+import User from '../stores/user';
+import EventRowView from '../components/EventRowView';
 
 @observer
 export default class CreateEventScreen extends React.Component {
