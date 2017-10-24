@@ -8,7 +8,7 @@ import Colors from '../constants/Colors';
 import HomeScreen from '../screens/HomeScreen';
 
 import HostCalendarScreen from '../screens/HostCalendarScreen';
-import ChatScreen from '../screens/ChatScreen';
+import FilterScreen from '../screens/FilterScreen';
 import CalendarScreen from '../screens/CalendarScreen';
 import CreateEventScreen from '../screens/CreateEventScreen'
 
@@ -26,8 +26,8 @@ export default TabNavigator(
     Calendar: {
       screen: CalendarScreen,
     },
-    Chat: {
-      screen: ChatScreen,
+    Filter: {
+      screen: FilterScreen,
     },
   },
   {
@@ -46,7 +46,7 @@ export default TabNavigator(
               ? `ios-calendar${focused ? '' : '-outline'}`
               : 'md-calendar';
             break;
-          case 'Chat':
+          case 'Filter':
             iconName = Platform.OS === 'ios'
               ? `ios-chatbubbles${focused ? '' : '-outline'}`
               : 'md-chatbubbles';

@@ -50,7 +50,7 @@ class Store {
 	@computed get allTags () {
 		aTags = new Set();
 		this.events.filter(event => event.tags.filter(tag => aTags.add(tag)));
-		return aTags;
+		return [...aTags];
 
 	}
 

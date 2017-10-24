@@ -38,6 +38,7 @@ export default class HomeScreen extends React.Component {
   }
 
   _renderYup = () => {
+    console.log(Store.allTags);
     try{this.handleYup(this.refs.swipeCardDisplay.state.card);}
     catch(e){}
   }
