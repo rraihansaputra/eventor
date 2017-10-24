@@ -47,7 +47,10 @@ class Store {
 			user.eventsInterested.includes(event.key)), 'dateTime');
 	}
 
-	@computed get allTags () { //TODO
+	@computed get allTags () {
+		aTags = new Set();
+		this.events.filter(event => event.tags.filter(tag => aTags.add(tag)));
+		return aTags;
 
 	}
 
