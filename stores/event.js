@@ -13,7 +13,7 @@ export default class Event {
   @observable created_by = '';
 
   constructor(name, hostName, dateTime, location, description, created_by, tags='') {
-    this.key = Date.now();
+    this.key = Date().toString() + name;
     this.name = name;
     this.hostName = hostName;
     this.dateTime = dateTime;

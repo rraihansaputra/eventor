@@ -64,6 +64,7 @@ export default class HomeScreen extends React.Component {
             renderNoMoreCards={() => <NoMoreCards />}
             handleYup={this.handleYup}
             handleNope={this.handleNope}
+            dragY={false}
           />
         </View>
         <View style={styles.container, {paddingTop: 10, flexDirection:'row', justifyContent:'center'}}>
@@ -104,12 +105,14 @@ class Card extends React.Component {
   render() {
     return (
       <View style={styles.card}>
+        <ScrollView>
         <Text>{this.props.name}</Text>
         <Text> {this.props.hostName} </Text>
         <Text> {this.props.dateTime.toString()} </Text>
         <Text> {this.props.location} </Text>
         <Text> {this.props.description} </Text>
         <Text> {this.props.tags.join(" ")} </Text>
+        </ScrollView>
       </View>
     )
   }
