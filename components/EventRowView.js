@@ -11,7 +11,7 @@ export default class EventRowView extends React.Component {
     return (
       <View key={event.key} style={styles.container}>
         <View>
-          <Text style={{fontSize:20}}> {event.name} </Text>
+          <Text style={{fontSize:20, textDecorationLine:'underline', lineHeight: 25}}> {event.name} </Text>
           <Text> hosted by {event.hostName} </Text>
         </View>
         <View>

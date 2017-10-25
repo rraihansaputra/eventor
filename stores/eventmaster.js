@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { action, computed, observable } from 'mobx';
 import Event from './event'
+import shuffle from 'shuffle-array'
 
 class Store {
 	@observable events = [];
@@ -12,6 +13,14 @@ class Store {
 	}
 
 	@action _initialEventPopulate() {
+		this.addEvent("LAN Party", "Local Gamers", new Date(2017, 10, 1, 13), "Southbank", `Nothing but LAN Party for the whole weekend! Bring your PC, hunker down with your friends, and have fun! 
+		Featuring:
+		- The final of BCSTournament
+		- Stands from vendors and gaming studios
+		- Epic food trucks
+		- Lucky draw for gaming gear
+		
+		Don't forget to sign up, we have limited space in the building!`,"admin", "gaming computers lan party food truck");
 		this.addEvent("Knitting Tutorials 101", "Knitting Community", new Date(2017, 10, 1, 13), "Southbank", "Learn to knit with instagram extraordinaire, Me!","knit", "knitting tutorial beginners");
 		this.addEvent("Cars and Coffee", "RealGarage", new Date(2017, 11, 9, 7), "Toowong", "No frills, just Cars and Coffee on a Sunday morning", "cars", "cars meetup coffee sunday");
 		this.addEvent("Book Fair 2018", "Library", new Date(), "CBD", "Biggest book fair in Brisbane is coming!", "book", "book fair discount literature books");
@@ -37,10 +46,10 @@ class Store {
 	}
 
 	@observable unseenEvents(user) {
-		return this.events.filter(event =>
+		return shuffle(this.events.filter(event =>
 			!user.eventsSeen.includes(event.key) &&
 			event.created_by != user.id &&
-			event.tags.some(r=> user.tagSet.has(r)));
+			event.tags.some(r=> user.tagSet.has(r))));
 	}
 
 	@observable interestedEvents(user) {

@@ -5,7 +5,7 @@ class User {
 	@observable id = 'admin';
 	@observable eventsSeen = [];
 	@observable eventsInterested = [];
-	@observable tagSet = new Set(["books", "cars", "knitting"]);
+	@observable tagSet = new Set(["books", "cars", "knitting", "lan", "disco", "brisbane"]);
 	@observable loaded = false;
 
 	@action addEventSeen(eventKey) {

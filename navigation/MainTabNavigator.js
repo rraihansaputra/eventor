@@ -48,8 +48,8 @@ export default TabNavigator(
             break;
           case 'Filter':
             iconName = Platform.OS === 'ios'
-              ? `ios-chatbubbles${focused ? '' : '-outline'}`
-              : 'md-chatbubbles';
+              ? `ios-gear${focused ? '' : '-outline'}`
+              : 'md-gear';
           case 'HostCalendar':
             iconName = Platform.OS === 'ios'
               ? `ios-calendar${focused ? '' : '-outline'}`

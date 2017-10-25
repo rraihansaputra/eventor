@@ -53,10 +53,12 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-      <Text style={styles.eventor}
-          >EVENTOR</Text>
+      <Text style={styles.eventor}>EVENTOR</Text>
         <View
           style={styles.container, {height:500}}>
+					<View style={{}}>
+						<Text style={{fontSize: 15, textAlign: 'center', paddingTop: 10}}>Available Events Near You</Text>
+					</View>
           <SwipeCards
             ref={'swipeCardDisplay'}
             cards={Store.unseenEvents(User)}
@@ -106,13 +108,15 @@ class Card extends React.Component {
     return (
       <View style={styles.card}>
         <ScrollView>
-        <Text>{this.props.name}</Text>
-        <Text> {this.props.hostName} </Text>
+				<View style={styles.container}>
+        <Text style={{fontSize: 20, textDecorationLine:'underline', lineHeight: 25}}>{this.props.name}</Text>
+        <Text> hosted by {this.props.hostName} </Text>
         <Text> {this.props.dateTime.toString()} </Text>
-        <Text> {this.props.location} </Text>
-        <Text> {this.props.description} </Text>
+        <Text> at {this.props.location} </Text>
+        <Text style={{marginTop:5}}> {this.props.description} </Text>
         <Text> {this.props.tags.join(" ")} </Text>
-        </ScrollView>
+        </View>
+				</ScrollView>
       </View>
     )
   }

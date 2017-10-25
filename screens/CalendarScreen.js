@@ -9,7 +9,7 @@ import EventRowView from '../components/EventRowView';
 @observer
 export default class CalendarScreen extends React.Component {
   static navigationOptions = {
-    title: 'Calendar',
+    title: 'Upcoming Events',
   };
 
   render() {
